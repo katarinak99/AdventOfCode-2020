@@ -14,6 +14,7 @@ namespace Day01
                 .ToList();
 
             Part01(numbers);
+            Part02(numbers);
         }
 
         private static void Part01(IReadOnlyList<int> numbers)
@@ -30,6 +31,27 @@ namespace Day01
 
                     Console.WriteLine(first * second);
                     return;
+                }
+            }
+        }
+
+        private static void Part02(IReadOnlyList<int> numbers)
+        {
+            for (var i = 0; i < numbers.Count - 2; i++)
+            {
+                for (var j = i + 1; j < numbers.Count - 1; j++)
+                {
+                    for (var k = j + 1; k < numbers.Count; k++)
+                    {
+                        var first = numbers[i];
+                        var second = numbers[j];
+                        var third = numbers[k];
+                        var sum = first + second + third;
+
+                        if (sum != 2020) continue;
+                        Console.WriteLine(first * second * third);
+                        return;
+                    }
                 }
             }
         }
