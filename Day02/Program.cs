@@ -13,15 +13,26 @@ namespace Day02
             var lines = File.ReadAllLines("input02.txt")
                 .Select(Spec.Parse);
             
-            Console.WriteLine(lines.Count(password => Part01(password)));
+            Console.WriteLine(CommonPart(lines, Part01));
+            Console.WriteLine(CommonPart(lines, Part02));
         }
 
+        private static long CommonPart(IEnumerable<Spec> specs, Predicate<Spec> isValid)
+        {
+            return specs.Count(password => isValid(password));
+        }
 
         private static bool Part01(Spec spec)
         {
             var regex = @"[^" + spec.Character + "]";
             var reduced = Regex.Replace(spec.Password, regex, "");
             return reduced.Length >= spec.First && reduced.Length <= spec.Second;
+        }
+
+        private static bool Part02(Spec spec)
+        {
+            return spec.Password[spec.First - 1] == spec.Character ^
+                   spec.Password[spec.Second - 1] == spec.Character;
         }
     }
 
