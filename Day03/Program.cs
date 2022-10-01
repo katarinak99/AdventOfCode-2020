@@ -8,7 +8,20 @@
         {
             var lines = File.ReadAllLines("input03.txt")
                 .ToList();
+            // Part 1
             var result = FindTrees(lines, new Slope(3, 1));
+            Console.WriteLine(result);
+
+            // Part 2
+            var slopes = new List<Slope>
+            {
+                new Slope(1, 1),
+                new Slope(3, 1),
+                new Slope(5, 1),
+                new Slope(7, 1),
+                new Slope(1, 2)
+            };
+            result = slopes.Aggregate(1, (current, slope) => current * FindTrees(lines, slope));
             Console.WriteLine(result);
         }
 
